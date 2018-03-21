@@ -1,7 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe Task, type: :model do
-
   before :each do
     @task = Task.new
   end
