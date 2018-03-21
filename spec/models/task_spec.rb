@@ -33,4 +33,28 @@ RSpec.describe Task, type: :model do
       expect(@task.save).to be false
     end
   end
+  describe 'complete' do
+    it 'defaults to false' do
+      @task.description = 'Walk the dogs'
+      @task.save!
+      expect(@task.complete).to be false
+    end
+  end
+  describe '#complete?' do
+    it 'returns the complete value' do
+      @task.complete = true
+      @task.save
+      expect(@task.complete?).to be true
+    end
+  end
+  describe '#complete!' do
+    it 'completes the task' do
+      @task.complete = false
+      expect {
+        @task.complete!
+      }.to change{
+        @task.complete?
+      }.from(false).to(true)
+    end
+  end
 end
