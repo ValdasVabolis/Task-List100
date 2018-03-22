@@ -1,17 +1,23 @@
 <h1>My Task List</h1>
-<button id='add-new-task'>Add New Task</button>
-<input type='text' name='Task Field' id='new-task'>
-<table>
+<%= form_for @task, remote: true do |t| %>
+  <%= t.text_field :description, id: 'new-task' %>
+  <%= t.submit 'Add New Task', id: 'add-new-task' %>
+<% end %>
+<table class='task-table'>
   <tr>
     <th>Task Description</th>
     <th>Complete</th>
   </tr>
-  <% @tasks.each do |t| %>
-    <tr>
-      <td><%= t.description %></td>
-      <td><%= t.complete? %></td>
-    </tr>
-  <% end %>
+  <tbody>
+    <% @tasks.each do |t| %>
+      <tr>
+        <div class='task-item'>
+          <td><%= t.description %></td>
+          <td><%= t.complete? %></td>
+        </div>
+      </tr>
+    <% end %>
+  </tbody>
 </table>
 <% if @tasks.empty? %>
   It looks like your task list is empty! Add new tasks to get started.
